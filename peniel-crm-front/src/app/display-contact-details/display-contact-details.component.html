@@ -1,0 +1,393 @@
+<div>
+    <mat-card style="background: azure;">
+        <h2>Contact</h2>
+        <button mat-raised-button color="primary" (click)="updateContact()">MODIFIER</button>
+        <button mat-button color="warn" (click)="cancel()">Annuler</button>
+    </mat-card>
+</div>
+
+<br>
+
+<p>{{contact?.prenom}} - {{contact?.nom}}</p>
+
+<mat-radio-group *ngIf="contact" aria-label="Select a type" [(ngModel)]="contact.typeContact" disabled>
+    <mat-radio-button value="PARTICULIER">PARTICULIER</mat-radio-button>
+    <mat-radio-button value="SOCIETE">SOCIETE</mat-radio-button>
+</mat-radio-group>
+<mat-card>
+
+    <table *ngIf="contact">
+
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Civilité</td>
+            <td>
+                <mat-form-field appearance="none" style="width: 13% !important">
+                    <input matInput [(ngModel)]="contact.civilite" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="none" style="padding-left: 1em;width: 45% !important">
+                    <input matInput placeholder="Nom" [(ngModel)]="contact.nom">
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Prénom</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.prenom" >
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr *ngIf="!isParticulier">
+            <td class="decalage-label">Raison Sociale</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.raisonSociale" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Siren</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.siren" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr *ngIf="!isParticulier">
+            <td class="decalage-label">Activité Principale</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.activitePrincipale" readonly>
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Effectif</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.tailleEntreprise" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Fonction</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.fonction" readonly>
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Tél Fixe</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input type="tel" matInput  [(ngModel)]="contact.telephoneFixe" readonly>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </td>
+            <td *ngIf="!isParticulier" class="decalage-label">Contact Principal</td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.contactPrincipalNom" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Tél Mobile 1</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input type="tel" matInput [(ngModel)]="contact.telephoneMobile1" readonly>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Tél Mobile 2</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input type="tel" matInput [(ngModel)]="contact.telephoneMobile2" readonly>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Email Perso</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input type="tel" matInput [(ngModel)]="contact.emailPerso" readonly>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Email Pro</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input type="tel" matInput  [(ngModel)]="contact.emailPro" readonly>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+                
+            </td>
+        </tr>
+
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Structure</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.structure" readonly>
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Activité</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.activite" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Adresse Perso</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePerso" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Adresse Pro</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePro" readonly>
+                </mat-form-field>
+            </td>
+
+            <td *ngIf="!isParticulier" class="decalage-label"></td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none" style="padding-left: 1em;">
+                    <input matInput [(ngModel)]="contact.contactPrincipalTelephoneMobile" readonly>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Code Postal</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none" style="padding-left: 1em;">
+                    <input matInput [(ngModel)]="contact.adressePersoCodePostal" readonly>
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Code Postal</td>
+            <td>
+                <mat-form-field appearance="none" style="padding-left: 1em;">
+                    <input matInput  [(ngModel)]="contact.adresseProCodePostal" readonly>
+                </mat-form-field>
+            </td>
+
+            <td *ngIf="!isParticulier" class="decalage-label"></td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput  [(ngModel)]="contact.contactPrincipalEmail" readonly>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Ville</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePersoVille" readonly>
+                </mat-form-field>
+
+            <td class="decalage-label"> Ville</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput  [(ngModel)]="contact.adresseProVille" readonly>
+                </mat-form-field>
+
+            </td>
+
+            <td *ngIf="!isParticulier" class="decalage-label">Contact Sécondaire</td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.contactSecondaireNom" readonly>
+                </mat-form-field>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Pays</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePersoPays" readonly>
+                </mat-form-field>
+
+            <td class="decalage-label">Pays</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput  [(ngModel)]="contact.adresseProPays" readonly>
+                </mat-form-field>
+
+            </td>
+            <td *ngIf="!isParticulier" class="decalage-label"></td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none" style="padding-left: 1em;">
+                    <input matInput  [(ngModel)]="contact.contactSecondaireTelephoneMobile" readonly>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label">Zone géographique</td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePersoZoneGeo" readonly>
+                </mat-form-field>
+
+            <td class="decalage-label">Zone géographique</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adresseProZoneGeo" readonly>
+                </mat-form-field>
+
+            </td>
+
+            <td *ngIf="!isParticulier" class="decalage-label"></td>
+            <td *ngIf="!isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.contactSecondaireEmail" readonly>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td *ngIf="isParticulier" class="decalage-label"></td>
+            <td *ngIf="isParticulier">
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.adressePersoZoneGeoSuite" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label"></td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput  [(ngModel)]="contact.adresseProZoneGeoSuite" readonly>
+                </mat-form-field>
+            </td>
+
+        </tr>
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Date de naissance</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.naissance" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Nationalité</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.nationalite" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+
+        <tr *ngIf="isParticulier">
+            <td class="decalage-label">Situation familiale</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.situationFamiliale" readonly> 
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Abonné</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.abonne" readonly> 
+                </mat-form-field>
+            </td>
+
+            <td class="decalage-label">Assigné à</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.assigne" readonly>
+                </mat-form-field>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Début Abonnement</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.debutAbonnement" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Renouvellement Abonnement</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.renAbonnement" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Type Abonnement</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.typeAbonnement" readonly>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Source</td>
+            <td>
+                <mat-form-field appearance="none">
+                    <input matInput [(ngModel)]="contact.source" readonly>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <mat-checkbox disabled>Prospect</mat-checkbox>
+        </tr>
+
+
+
+    </table>
+</mat-card>
+
+
+<mat-card *ngIf="contact">
+    <mat-tab-group>
+        <mat-tab label="Beneficiaires">
+
+        </mat-tab>
+        <mat-tab label="Favoris">
+            <table>
+                <tr>
+                    <td class="decalage-label">Type Restaurant Favori</td>
+                    <td>
+                        <mat-form-field appearance="none">
+                            <input matInput [(ngModel)]="contact.typeRestaurantPrefere" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="decalage-label">Type hebergement Favori</td>
+                    <td>
+                        <mat-form-field appearance="none">
+                            <input matInput [(ngModel)]="contact.typeHebergementPrefere" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+        </mat-tab>
+        <mat-tab label="Note">
+            <mat-form-field appearance="none">
+                <input matInput [(ngModel)]="contact.notes" placeholder="Ajouter notes..." readonly>
+            </mat-form-field>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

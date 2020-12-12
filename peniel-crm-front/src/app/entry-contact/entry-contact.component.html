@@ -1,0 +1,36 @@
+<div style="padding-bottom: 2em;">
+    <mat-card style="background: azure;">
+        <p>Contacts</p>
+        <button mat-raised-button color="primary">
+            <a routerLink="/contact">CREER</a>
+        </button>
+    </mat-card>
+</div>
+
+<mat-card style="background: azure;">
+    <table class="table table-bordered table-hover">
+         <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>E-mail</th>
+                <th>Telephone Fixe</th>
+                <th>Telephone</th>
+                <th>adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contact of contacts; let i = index" (click)="ClickedRow(i,contact.id)"
+                [class.active]="i == HighlightRow">
+                <td>{{contact.id}}</td>
+                <td>{{contact.nom}}</td>
+                <td>{{contact.prenom}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.telephoneFixe}}</td>
+                <td>{{contact.telephoneMobile}}</td>
+                <td>{{contact.adresseRue1}}</td>
+            </tr>
+        </tbody>
+    </table>
+</mat-card>

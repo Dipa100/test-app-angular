@@ -1,0 +1,641 @@
+<form [formGroup]="form" (submit)="submit()" style="border: medium;padding-top:2em">
+    <div>
+        <mat-card style="background: azure;">
+            <h2>Nouveau contact</h2>
+            <button mat-raised-button color="primary" (click)="sauvegarderContact()">Sauvegarder</button>
+            <button mat-button color="warn" (click)="cancel()">Annuler</button>
+        </mat-card>
+    </div>
+
+    <br>
+
+    <mat-radio-group aria-label="Select a type" [(ngModel)]="contact.typeContact" formControlName="typeContact"
+        (change)="typeContactChoosed($event)">
+        <mat-radio-button value="PARTICULIER">PARTICULIER&nbsp;</mat-radio-button>
+        <mat-radio-button value="SOCIETE">SOCIETE</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-card>
+        <table>
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Civilité</td>
+                <td>
+                    <mat-form-field appearance="fill" style="width: 13% !important">
+                        <select matNativeControl formControlName="civilite" [(ngModel)]="contact.civilite">
+                            <option selected></option>
+                            <option>Mr</option>
+                            <option>Mme</option>
+                            <option>Mlle</option>
+                            <option>S.E.M</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field style="padding-left: 1em;width: 45% !important">
+                        <input matInput placeholder="Nom" [(ngModel)]="contact.nom" formControlName="nom">
+                        <mat-error *ngIf="form.controls['nom'].touched && form.controls['nom'].hasError('required')">
+                            Nom est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label">Prénom</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="contact.prenom" formControlName="prenom">
+                        <mat-error
+                            *ngIf="form.controls['prenom'].touched && form.controls['prenom'].hasError('required')">
+                            Prenom est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr *ngIf="!isParticulier">
+                <td class="decalage-label">Raison Sociale</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="contact.raisonSociale" formControlName="raisonSociale">
+                        <mat-error
+                            *ngIf="form.controls['raisonSociale'].touched && form.controls['raisonSociale'].hasError('required')">
+                            raison sociale est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label">Siren</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="contact.siren" formControlName="siren">
+                        <mat-error
+                            *ngIf="form.controls['siren'].touched && form.controls['siren'].hasError('required')">
+                            Siren est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr *ngIf="!isParticulier">
+                <td class="decalage-label">Activité Principale</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl [(ngModel)]="contact.activitePrincipale"
+                            formControlName="activitePrincipale">
+                            <option value="" selected></option>
+                            <option>Agriculture/Agroalimentaire/Environnement</option>
+                            <option>Associatif/Art/Culture</option>
+                            <option> Banques/Assurances/Finances</option>
+                            <option>Commerce/Distribution</option>
+                            <option>Communication/Publicité/Média</option>
+                            <option>Conseil/Consulting</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Effectif</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput [(ngModel)]="contact.tailleEntreprise" formControlName="tailleEntreprise">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label">Fonction</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl formControlName="fonction" [(ngModel)]="contact.fonction">
+                            <option selected></option>
+                            <option>PDG</option>
+                            <option>DG</option>
+                            <option>DG Adjoint</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Tél Fixe</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input type="tel" matInput formControlName="telephoneFixe" [(ngModel)]="contact.telephoneFixe">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['telephoneFixe'].touched && form.controls['telephoneFixe'].hasError('required')">
+                        Tél fixe est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+                <td *ngIf="!isParticulier" class="decalage-label">Email</td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field class="example-full-width">
+                        <input type="tel" matInput formControlName="emailPerso" [(ngModel)]="contact.emailPerso">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['emailPerso'].hasError('email') && !form.controls['emailPerso'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        *ngIf="form.controls['emailPerso'].touched && form.controls['emailPerso'].hasError('required')">
+                        Email Perso est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td *ngIf="!isParticulier" class="decalage-label">Contact Principal</td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactPrincipalNom" [(ngModel)]="contact.contactPrincipalNom"
+                            placeholder="Nom">
+                    </mat-form-field>
+                </td>
+                <td *ngIf="!isParticulier" class="decalage-label">Contact Sécondaire</td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactSecondaireNom"
+                            [(ngModel)]="contact.contactSecondaireNom" placeholder="Nom">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactPrincipalNom" [(ngModel)]="contact.contactPrincipalNom"
+                            placeholder="Fonction">
+                    </mat-form-field>
+                </td>
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactSecondaireNom"
+                            [(ngModel)]="contact.contactSecondaireNom" placeholder="Fonction">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="contactPrincipalTelephoneMobile"
+                            [(ngModel)]="contact.contactPrincipalTelephoneMobile" placeholder="Tél Mobile">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                </td>
+
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="contactSecondaireTelephoneMobile"
+                            [(ngModel)]="contact.contactSecondaireTelephoneMobile" placeholder="Tél Mobile">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="contactPrincipalTelephoneMobile"
+                            [(ngModel)]="contact.contactPrincipalTelephoneMobile" placeholder="Tél Fixe">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                </td>
+
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="contactSecondaireTelephoneMobile"
+                            [(ngModel)]="contact.contactSecondaireTelephoneMobile" placeholder="Tél Fixe">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactPrincipalEmail"
+                            [(ngModel)]="contact.contactPrincipalEmail" placeholder="Email">
+                        <mat-icon matSuffix>email</mat-icon>
+
+                    </mat-form-field>
+
+                    <mat-error
+                        *ngIf="form.controls['contactPrincipalEmail'].hasError('email') && !form.controls['contactPrincipalEmail'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                </td>
+
+                <td *ngIf="!isParticulier" class="decalage-label"></td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="contactSecondaireEmail"
+                            [(ngModel)]="contact.contactSecondaireEmail" placeholder="Email">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['contactSecondaireEmail'].hasError('email') && !form.controls['contactSecondaireEmail'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+
+                </td>
+            </tr>
+
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Tél Mobile 1</td>
+                <td>
+                    <mat-form-field>
+                        <input type="tel" matInput formControlName="telephoneMobile1"
+                            [(ngModel)]="contact.telephoneMobile1">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['telephoneMobile1'].touched && form.controls['telephoneMobile1'].hasError('required')">
+                        Tél Mobile 1 est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+                <td class="decalage-label">Tél Mobile 2</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input type="tel" matInput formControlName="telephoneMobile2"
+                            [(ngModel)]="contact.telephoneMobile2">
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['telephoneMobile2'].touched && form.controls['telephoneMobile2'].hasError('required')">
+                        Tél mobile 2 est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+            </tr>
+
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Email Perso</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input type="tel" matInput formControlName="emailPerso" [(ngModel)]="contact.emailPerso">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['emailPerso'].hasError('email') && !form.controls['emailPerso'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        *ngIf="form.controls['emailPerso'].touched && form.controls['emailPerso'].hasError('required')">
+                        Email Perso est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+
+                <td class="decalage-label">Email Pro</td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input type="tel" matInput formControlName="emailPro" [(ngModel)]="contact.emailPro">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['emailPro'].hasError('email') && !form.controls['emailPro'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        *ngIf="form.controls['emailPro'].touched && form.controls['emailPro'].hasError('required')">
+                        Email Pro est <strong>obligatoire</strong>
+                    </mat-error>
+                </td>
+            </tr>
+
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Structure</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput placeholder="Structure ..." formControlName="structure"
+                            [(ngModel)]="contact.structure">
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Activité</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput placeholder="Activité ..." formControlName="activite"
+                            [(ngModel)]="contact.activite">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label">Adresse Perso</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="adressePerso" [(ngModel)]="contact.adressePerso"
+                            placeholder="Rue...">
+                    </mat-form-field>
+                </td>
+                <td *ngIf="isParticulier" class="decalage-label">Adresse Pro</td>
+                <td *ngIf="!isParticulier" class="decalage-label">Adresse</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="adressePro" [(ngModel)]="contact.adressePro"
+                            placeholder="Rue...">
+                    </mat-form-field>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label">Code Postal</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="adressePersoCodePostal"
+                            [(ngModel)]="contact.adressePersoCodePostal" placeholder="Code Postal">
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Code Postal</td>
+                <td>
+                    <mat-form-field style="padding-left: 1em;">
+                        <input matInput formControlName="adresseProCodePostal"
+                            [(ngModel)]="contact.adresseProCodePostal" placeholder="Code Postal">
+                    </mat-form-field>
+                </td>
+
+            </tr>
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label"> Ville</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="adressePersoVille" [(ngModel)]="contact.adressePersoVille"
+                            placeholder="Ville">
+                    </mat-form-field>
+
+                <td class="decalage-label"> Ville</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="adresseProVille" [(ngModel)]="contact.adresseProVille"
+                            placeholder="Ville">
+                    </mat-form-field>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label">Pays</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field>
+                        <mat-select  >
+                            <mat-option  *ngFor="let pays of allPays; let i = index" [value]="pays">
+                                {{ pays.nom_fr_fr}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                <td class="decalage-label">Pays</td>
+                <td>
+                    <mat-form-field>
+                        <mat-select  >
+                            <mat-option [(ngModel)]="contact.adressePeroPays" *ngFor="let pays of allPays; let i = index" [value]="pays">
+                                {{ pays.nom_fr_fr}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label">Zone géographique</td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="adressePersoZoneGeo" [(ngModel)]="contact.adressePersoZoneGeo"
+                            placeholder="Zone géographique">
+                    </mat-form-field>
+
+                <td class="decalage-label">Zone géographique</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="adresseProZoneGeo" [(ngModel)]="contact.adresseProZoneGeo"
+                            placeholder="Zone géographique">
+                    </mat-form-field>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td *ngIf="isParticulier" class="decalage-label"></td>
+                <td *ngIf="isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="adressePersoZoneGeoSuite"
+                            [(ngModel)]="contact.adressePersoZoneGeoSuite">
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label"></td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="adresseProZoneGeoSuite"
+                            [(ngModel)]="contact.adresseProZoneGeoSuite">
+                    </mat-form-field>
+
+                </td>
+
+            </tr>
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Date de naissance</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="pickernaissance" formControlName="naissance"
+                            [(ngModel)]="contact.naissance">
+                        <mat-datepicker-toggle matSuffix [for]="pickernaissance"></mat-datepicker-toggle>
+                        <mat-datepicker #pickernaissance></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label">Nationalité</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput formControlName="nationalite" [(ngModel)]="contact.nationalite"
+                            placeholder="Nationalité...">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+
+            <tr *ngIf="isParticulier">
+                <td class="decalage-label">Situation familiale</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl formControlName="situationFamiliale"
+                            [(ngModel)]="contact.situationFamiliale">
+                            <option selected></option>
+                            <option>Marié</option>
+                            <option>PACS</option>
+                            <option>Celibataire</option>
+                            <option>Veuf</option>
+                            <option>Divorcé ou séparé</option>
+                            <option>Concubin</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Etiquette</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput>
+                    </mat-form-field>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="decalage-label">Date d'entrée</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="pickerDateEntree" formControlName="debutAbonnement"
+                            [(ngModel)]="contact.debutAbonnement">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDateEntree"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDateEntree></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td *ngIf="!isParticulier" class="decalage-label">Site Internet</td>
+                <td *ngIf="!isParticulier">
+                    <mat-form-field>
+                        <input matInput formControlName="adressePerso" [(ngModel)]="contact.adressePerso"
+                            placeholder="">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td class="decalage-label">Abonné</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl formControlName="abonne" [(ngModel)]="contact.abonne">
+                            <option selected></option>
+                            <option>Oui</option>
+                            <option>Non</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+
+                <td class="decalage-label">Assigné à</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl formControlName="assigne" [(ngModel)]="contact.assigne">
+                            <option value="" selected></option>
+                            <option>Germaine</option>
+                            <option>Alexandra</option>
+                            <option>Amina</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="decalage-label">Début Abonnement</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="pickerDebAbonnement" formControlName="debutAbonnement"
+                            [(ngModel)]="contact.debutAbonnement">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDebAbonnement"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDebAbonnement></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label">Renouvellement Abonnement</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="pickerRenAbonnement" formControlName="renAbonnement"
+                            [(ngModel)]="contact.renAbonnement">
+                        <mat-datepicker-toggle matSuffix [for]="pickerRenAbonnement"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerRenAbonnement></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="decalage-label">Type Abonnement</td>
+                <td>
+                    <mat-form-field appearance="fill">
+                        <select matNativeControl formControlName="typeAbonnement" [(ngModel)]="contact.typeAbonnement">
+                            <option value="" selected></option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Decouverte">Découverte</option>
+                            <option value="Droit d'entrée">Droit d'entrée</option>
+                            <option value="Evasion">Evasion</option>
+                            <option value="Nomade">Nomade</option>
+                        </select>
+                    </mat-form-field>
+                </td>
+                <td class="decalage-label">Source</td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="source" [(ngModel)]="contact.source" placeholder="source...">
+                    </mat-form-field>
+                </td>
+            </tr>
+
+            <tr>
+                <mat-checkbox>Prospect</mat-checkbox>
+            </tr>
+
+        </table>
+    </mat-card>
+
+    <br>
+    <div>
+        <mat-card>
+            <mat-tab-group>
+                <mat-tab label="Beneficiaires">
+                    <div class="example-button-row">
+                        <button mat-button color="primary" (click)="openAddBeneficiareDialog()">Ajouter</button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Centres d'intérêts">
+                    <br>
+                    <table>
+                        <tr>
+                            <td class="decalage-label">Type Restaurant Favori</td>
+                            <td>
+                                <mat-form-field appearance="fill">
+                                    <mat-select multiple formControlName="typeRestaurantPrefere">
+                                        <mat-option>Africain</mat-option>
+                                        <mat-option>Bresilien</mat-option>
+                                        <mat-option>Fast food</mat-option>
+                                        <mat-option>Japonais</mat-option>
+                                        <mat-option>Indien</mat-option>
+                                        <mat-option>Français</mat-option>
+                                        <mat-option>Pas vraiment</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="decalage-label">Type hebergement Favori</td>
+                            <td>
+                                <mat-form-field appearance="fill">
+                                    <mat-select multiple formControlName="typeHebergementPrefere">
+                                        <mat-option>Camping</mat-option>
+                                        <mat-option>Hotel 3*</mat-option>
+                                        <mat-option>Hotel 4*</mat-option>
+                                        <mat-option>Hotel 5*</mat-option>
+                                        <mat-option>Palace</mat-option>
+                                        <mat-option>Appartement saisonnier</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </mat-tab>
+
+                <mat-tab label="Note">
+                    <mat-form-field style="width: 100% !important;">
+                        <textarea matInput formControlName="notes" placeholder="Ajouter Note..."></textarea>
+                    </mat-form-field>
+                </mat-tab>
+
+                <mat-tab label="Descriptif">
+                    
+                </mat-tab>
+
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</form>

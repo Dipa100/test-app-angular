@@ -1,0 +1,145 @@
+<form [formGroup]="form">
+    <table>
+        <tr>
+            <td class="decalage-label">Nom</td>
+            <td>
+                <mat-form-field>
+                    <input matInput formControlName="nom">
+                    <mat-error *ngIf="form.controls['nom'].touched && form.controls['nom'].hasError('required')">
+                        Nom est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+            </td>
+            <td class="decalage-label">Prenom</td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="prenom">
+                    <mat-error *ngIf="form.controls['prenom'].touched && form.controls['prenom'].hasError('required')">
+                        Prenom est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+        <td class="decalage-label">Tel Fixe</td>
+        <td>
+            <mat-form-field>
+                <input type="tel" matInput formControlName="telephoneFixe">
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            <mat-error
+                *ngIf="form.controls['telephoneFixe'].touched && form.controls['telephoneFixe'].hasError('required')">
+                Tel fixe est <strong>obligatoire</strong>
+            </mat-error>
+        </td>
+        <td class="decalage-label">Tel Mobile</td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <input type="tel" matInput formControlName="telephone">
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="form.controls['telephone'].touched && form.controls['telephone'].hasError('required')">
+                Tel fixe est <strong>obligatoire</strong>
+            </mat-error>
+        </td>
+        <tr>
+            <td class="decalage-label">Email</td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <input type="tel" matInput formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+                <mat-error
+                    *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+                    Email est <strong>obligatoire</strong>
+                </mat-error>
+            </td>
+            <td class="decalage-label">Lien vers un site web</td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <input type="tel" matInput formControlName="siteInternet">
+                    <mat-icon matSuffix>satellite</mat-icon>
+                </mat-form-field>
+                <mat-error
+                    *ngIf="form.controls['siteInternet'].touched && form.controls['siteInternet'].hasError('required')">
+                    Site Internet est <strong>obligatoire</strong>
+                </mat-error>
+            </td>
+        </tr>
+        <tr>
+            <td class="decalage-label">Adresse</td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Rue...">
+                </mat-form-field>
+            </td>
+
+
+            <td class="decalage-label"> Lien avec le bénéficiaire</td>
+            <td>
+                <mat-form-field appearance="fill">
+                    <select matNativeControl>
+                        <option selected></option>
+                        <option>Conjoint(e)</option>
+                        <option>Enfant</option>
+                        <option>Parent</option>
+                        <option>Autre</option>
+                    </select>
+                </mat-form-field>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Code Postal</td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Code Postal">
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td class="decalage-label">Ville</td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Ville">
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Pays</td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Pays">
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="decalage-label">Zone Géographique</td>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Zone Géographique">
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="decalage-label"></td>
+            <td>
+                <mat-form-field>
+                    <input matInput>
+                </mat-form-field>
+            </td>
+        </tr>
+
+    </table>
+
+    <div style="padding-top:2em">
+        <button mat-raised-button color="primary" (click)="addBeneficiaires()">Enregistrer</button>
+        <button mat-button color="warn">Annuler</button>
+    </div>
+</form>

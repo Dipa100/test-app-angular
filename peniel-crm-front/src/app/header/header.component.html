@@ -1,0 +1,78 @@
+<mat-card style="background: azure;">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <!--a href="#" class="navbar-brand">Peniel CRM</a-->
+        <ul class="navbar-nav mr-auto" routerLinkActive="active">
+            <li class="nav-item">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>dialpad</mat-icon>
+                      <span><a routerLink="/m-contacts">Contacts</a></span>
+                    </button>
+
+                    <button mat-menu-item>
+                        <mat-icon>dialpad</mat-icon>
+                        <span>Prestataires</span>
+                    </button>
+
+                    <button mat-menu-item>
+                      <mat-icon>work</mat-icon>
+                      <span>Taches</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>notifications</mat-icon>
+                      <span>notifications</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>Comptabilité</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>person</mat-icon>
+                        <span>Mon compte</span>
+                      </button>
+                      <button mat-menu-item>
+                        <span>Newsletter</span>
+                      </button>
+                      <button mat-menu-item>
+                        <span>Evénements</span>
+                      </button>
+                      <button mat-menu-item>
+                        <span>Documents</span>
+                      </button>
+                  </mat-menu>
+            </li>
+            <li class="nav-item">
+                <a href="/home" class="nav-link" routerLink="home">Home </a>
+            </li>
+            <li class="nav-item" *ngIf="showAdminBoard">
+                <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
+            <li class="nav-item" *ngIf="showModeratorBoard">
+                <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+            </li>
+        </ul>
+    
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+                <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="nav-link" routerLink="login">Login</a>
+            </li>
+        </ul>
+    
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()">LogOut</a>
+            </li>
+        </ul>
+    </nav>
+</mat-card>

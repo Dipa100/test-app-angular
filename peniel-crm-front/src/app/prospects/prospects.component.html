@@ -1,0 +1,350 @@
+<div class="container p-3">
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="form" (submit)="submit()">
+                <div class="card">
+                    <div class="card-header"> Nouveau Prospect</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Nom</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="name">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['name'].touched && form.controls['name'].hasError('required')">
+                                    Name est obligatoire! </span>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Prenom</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="prenom">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['prenom'].touched && form.controls['prenom'].hasError('required')">
+                                    prenom est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Assigné à</span>
+                                    </div>
+                                    <select class="custom-select" formControlName="assigne">
+                                        <option value="1">Concierge 1</option>
+                                        <option value="2">Concierge 2</option>
+                                        <option value="3">Concierge 3</option>
+                                      </select>
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['assigne'].touched && form.controls['assigne'].hasError('required')">
+                                    Le champ Assigne à est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Telephone
+                                            principal</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="telephone">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['telephone'].touched && form.controls['telephone'].hasError('required')">
+                                    Telephone mobile est obligatoire! </span>
+                            </div>
+
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Société</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="name">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['telephoneFixe'].touched && form.controls['telephoneFixe'].hasError('required')">
+                                    Telephone Fixe est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default"> Telephone Mobile</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="email">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+                                    Telephone Mobile est obligatoire! </span>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Fax</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="fax">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['fax'].touched && form.controls['fax'].hasError('required')">
+                                    Fax est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Source du prospect
+                                            </span>
+                                    </div>
+                                    <select class="custom-select" formControlName="assigne">
+                                        <option value="1"> Prospection Téléphonique</option>
+                                        <option value="2">Client existant</option>
+                                        <option value="3">Auto Généré</option>
+                                        <option value="3">Employé</option>
+                                        <option value="3">Partenaire</option>
+                                        <option value="3">Rélations puliques</option>
+                                        <option value="3">Email direct</option>
+                                        <option value="3">Salon</option>
+                                        <option value="3">Site Internet</option>
+                                        <option value="3">Bouche à Oreilles</option>
+                                        <option value="3">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Email Principal</span>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Secteur</span>
+                                    </div>
+                                    <select class="custom-select" formControlName="assigne">
+                                        <option value="1"> Banking</option>
+                                        <option value="2">Biotechnologie</option>
+                                        <option value="3">Produits chimiques</option>
+                                        <option value="3">Communications</option>
+                                        <option value="3">Construction</option>
+                                        <option value="3">Consulting</option>
+                                        <option value="3">Education</option>
+                                        <option value="3">Electronique</option>
+                                        <option value="3">Energie</option>
+                                        <option value="3">Ingénierie</option>
+                                        <option value="3">Divertissement</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Site Web</span>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"
+                                            id="inputGroup-sizing-default">Revenu annuel</span>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">
+                                            Statut</span>
+                                    </div>
+                                    <select class="custom-select" formControlName="assigne">
+                                        <option value="1"> Attente de contact</option>
+                                        <option value="2">Froid</option>
+                                        <option value="3">A contacter</option>
+                                        <option value="3">Coontacté</option>
+                                        <option value="3">Chaud</option>
+                                        <option value="3">En sommeil</option>
+                                        <option value="3">Perdu</option>
+                                        <option value="3">Non contacté</option>
+                                        <option value="3">Pré qualifié</option>
+                                        <option value="3">Qualifié</option>
+                                        <option value="3">Brûlant</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Effectif
+                                            </span>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">
+                                            Note</span>
+                                    </div>
+                                    <select class="custom-select">
+                                        <option value="1">Acquis</option>
+                                        <option value="2">Actif</option>
+                                        <option value="3">Echec du marché</option>
+                                        <option value="3">Projet annulé</option>
+                                        <option value="3">Fermer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">Détails de l'adresse</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Rue</span>
+                                    </div>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="adresse"></textarea>
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['adresse'].touched && form.controls['adresse'].hasError('required')">
+                                    Rue est obligatoire! </span>
+                            </div>
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Boite Postal</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="codePostal">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['codePostal'].touched && form.controls['codePostal'].hasError('required')">
+                                    Boite Postal est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Code Postal</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="codePostal">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['codePostal'].touched && form.controls['codePostal'].hasError('required')">
+                                    Code Postal est obligatoire! </span>
+                            </div>
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Ville</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="ville">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['ville'].touched && form.controls['ville'].hasError('required')">
+                                    Ville est obligatoire! </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Pays</span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="pays">
+                                </div>
+                                <span class="text-danger"
+                                    *ngIf="form.controls['pays'].touched && form.controls['pays'].hasError('required')">
+                                    Pays est obligatoire! </span>
+                            </div>
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Departement</span>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">Description détaillée</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                                    </div>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-success m-1" 
+                                    type="submit">Enregistrer</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-danger" type="submit">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

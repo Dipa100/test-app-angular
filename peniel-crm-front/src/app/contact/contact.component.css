@@ -1,0 +1,10 @@
+input, select, mat-option, textarea, mat-label, mat-select {
+    font-size: 15px !important;
+  
+}
+
+mat-icon{
+    font-size: 22px !important;
+}
+
+

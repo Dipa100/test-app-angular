@@ -1,0 +1,18 @@
+<div class="container-fluid">
+<div class="col-md-12">
+  <app-header></app-header>
+</div>
+<div class="row mr-2 ml-2">
+  <!--nav class="col-md-2" *ngIf="isLoggedIn">
+    <app-menu></app-menu>
+  </nav-->
+  <section class="col-md-12" [ngClass]="isLoggedIn?'col-md-12':'offset-1 col-md-12'">
+    <router-outlet></router-outlet>
+  </section>
+</div>
+<footer class="row mr-2 ml-2 mt-3" *ngIf="isLoggedIn">
+  <div class="col-md-12" class="footer">
+    Pied de page
+  </div>
+</footer>
+</div>

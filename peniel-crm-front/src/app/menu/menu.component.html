@@ -1,0 +1,101 @@
+<!--div id="accordion" class="menu">
+    <div class="card">
+        <div class="card-header" id="headingContact">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('contact')" class="btn btn-link collapsed"
+                    data-toggle="collapse" data-target="#collapseContact" aria-expanded="false"
+                    aria-controls="collapseContact">
+                    <i class="fa fa-plus" ></i><a routerLink="/m-contacts">Contact</a>
+                </button>
+            </h5>
+        </div>
+        <div *ngIf="menus.contact">
+            <div id="collapseContact" class="collapse" aria-labelledby="headingContact" data-parent="#accordion">
+                <div class="card-body">
+                    <i class="fa fa-user-plus"></i><a>Nouveau</a>
+                </div>
+            </div>
+            <div id="collapseContact" class="collapse" aria-labelledby="headingContact" data-parent="#accordion">
+                <div class="card-body">
+                    <i class="fa fa-folder"></i><a routerLink="/folderform">Dossier</a>
+                </div>
+            </div>
+            <div id="collapseContact" class="collapse" aria-labelledby="headingContact" data-parent="#accordion">
+                <div class="card-body">
+                    <i class="fa fa-fax"></i><a routerLink="/income">Facture</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingMesTaches">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('mesTaches')" class="btn btn-link collapsed"
+                    data-toggle="collapse" data-target="#collapseMesTaches" aria-expanded="false"
+                    aria-controls="collapseMesTaches">
+                    <i class="fa fa-tasks"></i><a routerLink="/tasks">Mes Tâches</a>
+                </button>
+            </h5>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingMesNotifications">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('mesNotifications')" class="btn btn-link collapsed"
+                    data-toggle="collapse" data-target="#collapseMesNotifications" aria-expanded="false"
+                    aria-controls="collapseMesNotifications">
+                    <i class="fa fa-envelope-o"></i><a routerLink="/Notifications">Mes Notifications</a>
+                </button>
+            </h5>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingComptabilite">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('comptabilite')" class="btn btn-link collapsed"
+                    data-toggle="collapse" data-target="#collapseComptabilite" aria-expanded="false"
+                    aria-controls="collapseComptabilite">
+                    <i class="fa fa-balance-scale"> </i><a>Comptabilité</a>
+                </button>
+            </h5>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header" id="headingMonCompte">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('monCompte')" class="btn btn-link collapsed"
+                    data-toggle="collapse" data-target="#collapseMonCompte" aria-expanded="false"
+                    aria-controls="collapseMonCompte">
+                    Mon compte
+                </button>
+            </h5>
+        </div>
+        <div *ngIf="menus.monCompte">
+            <div id="collapseMonCompte" class="collapse" aria-labelledby="headingMonCompte" data-parent="#accordion">
+                <div class="card-body">
+                    <i class="fa fa-user"></i><a routerLink="/personalInfo">Infos personnelles</a>
+                </div>
+            </div>
+            <div id="collapseMonCompte" class="collapse" aria-labelledby="headingMonCompte" data-parent="#accordion">
+                <div class="card-body">
+                    <a routerLink="/mdp">Mot de passe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div-->
+
+    <!--div class="card" *ngIf="authService.admin">
+        <div class="card-header" id="headingAdmin">
+            <h5 class="mb-0">
+                <button (click)="closeAllCollapsedWithout('admin')" class="btn btn-link" data-toggle="collapse"
+                    data-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
+                    <i class="fa fa-home"></i><a routerLink="/admin">Administration</a>
+                </button>
+            </h5>
+        </div>
+    </div-->

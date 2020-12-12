@@ -1,0 +1,12 @@
+input.mat-input-element {
+    font-size: 3em;
+}
+
+.td-font-weight{
+    font-weight:bold;
+}
+
+input, td{
+    font-size: 15px !important;
+  
+}

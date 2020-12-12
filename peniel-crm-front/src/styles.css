@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+
+.mat-form-field-flex {
+    background:white !important;
+}
+
+td{
+    width:32em;
+    font-family: Aria
+}
+
+mat-form-field {
+    width:25em
+}
+
+.decalage-label{
+    width:10%;
+    font-weight: bold;
+}
+
+
+mat-form-field.mat-form-field {
+    font-size: 6px;
+    width: 300px;
+}
+
+
+.adresse-width{
+    width: 20% !important;
+}
+
+/*************************************************************************/
+
+input, select, mat-option, textarea, mat-label, mat-select {
+    font-size: 15px !important;
+    font-family: Aria
+  
+}
+
+mat-icon{
+    font-size: 22px !important;
+}
+
+
